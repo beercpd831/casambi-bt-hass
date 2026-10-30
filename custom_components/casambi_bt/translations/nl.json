@@ -46,6 +46,11 @@
                     "overheated": "Oververhit"
                 }
             }
+        },
+        "number": {
+            "vertical": {
+                "name": "Lichtverdeling (boven/onder)"
+            }
         }
     }
 }

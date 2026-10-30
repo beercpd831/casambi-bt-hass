@@ -52,6 +52,11 @@
           "overheated": "正在过热"
         }
       }
+    },
+    "number": {
+      "vertical": {
+        "name": "光线分布（上/下）"
+      }
     }
   }
 }

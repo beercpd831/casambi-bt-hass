@@ -53,6 +53,11 @@
                     "overheated": "Überhitzt"
                 }
             }
+        },
+        "number": {
+            "vertical": {
+                "name": "Lichtverteilung (oben/unten)"
+            }
         }
     }
 }
