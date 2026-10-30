@@ -56,7 +56,7 @@
         },
         "number": {
             "vertical": {
-                "name": "Light distribution (up/down)"
+                "name": "Light downward"
             }
         }
     }
