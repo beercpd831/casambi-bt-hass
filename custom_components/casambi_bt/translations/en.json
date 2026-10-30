@@ -53,6 +53,11 @@
                     "overheated": "Overheated"
                 }
             }
+        },
+        "number": {
+            "vertical": {
+                "name": "Light distribution (down/up)"
+            }
         }
     }
 }

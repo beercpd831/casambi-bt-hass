@@ -9,7 +9,6 @@ from typing import cast
 from CasambiBt import Group, Unit, UnitControlType
 
 from homeassistant.components.number import (
-    NumberDeviceClass,
     NumberEntity,
     NumberEntityDescription,
 )
@@ -77,7 +76,7 @@ class CasambiVerticalNumber(CasambiEntity, NumberEntity, metaclass=ABCMeta):
     ) -> None:
         """Initialize a Casambi vertical entity base class."""
 
-        self._attr_device_class = NumberDeviceClass.ILLUMINANCE
+        self._attr_icon = "mdi:arrow-up-down"
         self._attr_native_min_value = 0
         self._attr_native_max_value = 255
 
@@ -96,7 +95,9 @@ class CasambiVerticalNumberUnit(CasambiVerticalNumber, CasambiUnitEntity):
     def __init__(self, api: CasambiApi, unit: Unit) -> None:
         """Initialize a Casambi vertical entity."""
 
-        desc = TypedNumberEntityDescription(key=unit.uuid, entity_type="vertical")
+        desc = TypedNumberEntityDescription(
+            key=unit.uuid, translation_key="vertical", entity_type="vertical"
+        )
 
         self._obj: Unit
         super().__init__(api, desc, unit)
