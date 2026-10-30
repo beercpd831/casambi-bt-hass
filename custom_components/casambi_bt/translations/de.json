@@ -56,7 +56,7 @@
         },
         "number": {
             "vertical": {
-                "name": "Lichtverteilung (unten/oben)"
+                "name": "Lichtverteilung (oben/unten)"
             }
         }
     }

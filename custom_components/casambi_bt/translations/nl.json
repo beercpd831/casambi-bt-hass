@@ -49,7 +49,7 @@
         },
         "number": {
             "vertical": {
-                "name": "Lichtverdeling (onder/boven)"
+                "name": "Lichtverdeling (boven/onder)"
             }
         }
     }
