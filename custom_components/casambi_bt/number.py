@@ -13,6 +13,7 @@ from homeassistant.components.number import (
     NumberEntityDescription,
 )
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import PERCENTAGE
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -78,15 +79,17 @@ class CasambiVerticalNumber(CasambiEntity, NumberEntity, metaclass=ABCMeta):
 
         self._attr_icon = "mdi:arrow-up-down"
         self._attr_native_min_value = 0
-        self._attr_native_max_value = 255
+        self._attr_native_max_value = 100
+        self._attr_native_step = 1
+        self._attr_native_unit_of_measurement = PERCENTAGE
 
         self._obj: Group | Unit
         super().__init__(api, description, obj)
 
     async def async_set_native_value(self, value: float) -> None:
-        """Set the vertical value."""
+        """Set the vertical value from a percentage (100% = all light down)."""
         await self._api.ensure_connected()
-        await self._api.casa.setVertical(self._obj, int(value))
+        await self._api.casa.setVertical(self._obj, round(value * 255 / 100))
 
 
 class CasambiVerticalNumberUnit(CasambiVerticalNumber, CasambiUnitEntity):
@@ -107,7 +110,7 @@ class CasambiVerticalNumberUnit(CasambiVerticalNumber, CasambiUnitEntity):
         """Get the vertical value of the unit."""
         unit = cast("Unit", self._obj)
         if unit.state is not None and unit.state.vertical is not None:
-            return float(unit.state.vertical)
+            return round(unit.state.vertical * 100 / 255)
         return None
 
 
@@ -133,5 +136,5 @@ class CasambiVerticalNumberGroup(CasambiVerticalNumber, CasambiNetworkGroup):
             if unit.state is not None and unit.state.vertical is not None
         ]
         if values:
-            return sum(values) / len(values)
+            return round(sum(values) / len(values) * 100 / 255)
         return None
